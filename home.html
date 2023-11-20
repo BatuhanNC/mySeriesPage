@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<style>
+    *{
+        padding:0;
+        margin:0;
+        box-sizing: border-box;
+    }
+    ::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: 0 0 5px grey; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(13, 13, 13); 
+  border-radius: 10px;
+  border-bottom: 1px solid #fff;
+  border-top: 1px solid #fff;
+}
+
+    body{
+        background-color: #090d29;
+        width: 100%;
+        height: 100vh;
+        background-attachment: fixed;
+        overflow-y: hidden;
+        /* background: linear-gradient(-45deg, #014872, #d7ede1 ); */
+    }
+    header{
+        /* background:linear-gradient(-45deg ,rgba(0 0 0 /.3),rgba(0 0 0 /.5),rgba(0 0 0 /.7)); */
+        background: #141b4a;
+        border: 1px solid rgba(255 255 255 /  50%);
+        backdrop-filter: blur(5px);
+        height: calc(100vh - 40px);
+        width: 30%;
+        float: right;
+        padding: 10px;
+        margin:20px;
+        border-radius: 10px;
+    }
+    header .movieInformation{
+        width:100%;
+        height: 300px;
+        background: url(./mybackground.png);
+        background-size: cover;
+        background-position: center;
+        border-radius: 10px;
+        margin-top: 20px;
+        position: relative;
+        border: 1px solid rgba(255 255 255 / .4);
+    }
+    header .movieInformation .lastEpisode{
+        background-color: rgba(0 0 0 / .7);
+        padding: 10px;
+        border-radius: 5px;
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        border: 1px solid rgba(255 255 255 / .7);
+        backdrop-filter: blur(5px);
+        transition: 300ms all ease-in-out;
+        text-align: center;
+        color: #fff;
+    }
+    header .movieInformation .informationText{
+        background-color: rgba(0 0 0 / .7);
+        padding: 10px;
+        border-radius: 5px;
+        margin: 5px;
+        position: absolute;
+        bottom: 5px;
+        border: 1px solid rgba(255 255 255 / .7);
+        backdrop-filter: blur(5px);
+        transition: 300ms all ease-in-out;
+        text-align: center;
+        color: #fff;
+    }
+    header .logo{
+        width: 150px;
+        height: 150px;
+        background:red;
+        margin: auto;
+        border-radius: 50%;
+        background-image: url(./my-profile.jpeg);
+        background-size: cover;
+        border: 1px solid rgba(255 255 255 /.3);
+    }
+    header .logo::before{
+        content:" ";
+        position: absolute;
+        background: #1bffff;
+        height:60px;
+        left:50px;
+        right: 50px;
+        top: 50px;
+        backdrop-filter: blur(10px);
+        opacity: .2;
+        filter: drop-shadow(10px 10px 20px #1bffff) drop-shadow(-10px -10px 20px #1bffff) drop-shadow(-10px 10px 20px #1bffff) drop-shadow(10px -10px 20px #1bffff);
+        z-index: -9;
+    }
+    header p{
+        font-size: 18px;
+        padding: 7px 10px;
+        color: #fff;
+        font-family:Georgia, 'Times New Roman', Times, serif;
+        border: 1px solid rgba(255 255 255 / .4);
+        margin: 10px 0;
+        border-radius: 5px;
+        background-color: #343e6a;
+    }
+    header .movieContinue b{
+        color:green
+    }
+    header .movieNewSeason b{
+        color:yellow
+    }
+    header .movieFinal b{
+        color:red
+    }
+    header p:nth-of-type(1){
+        border-bottom: 2px solid green;
+    }
+    header p:nth-of-type(2){
+        border-bottom: 2px solid yellow;
+    }
+    header p:nth-of-type(3){
+        border-bottom: 2px solid red;
+    }
+
+    .content{
+        width: 65%;
+        display:flex;
+        align-items: center;
+        justify-content: space-evenly;
+        height: 100vh;
+        flex-wrap: wrap;
+        align-content: space-between;
+        float: left;
+        overflow-y: scroll;
+        padding-top: 10px;
+    }
+    .content .topBunner{
+        width: 100%;
+        height: 70px;
+        margin: 0 20px 40px 20px;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-bottom: 3px solid yellow;
+        background:linear-gradient(rgba(255 255 255 /  20%) ,rgba(0 0 0 / .7), rgba(0 0 0 / .7));
+    }
+    .card{
+        position: relative;
+        width:200px;
+        height:350px;
+        border-radius: 5px;
+        margin: 20px;
+    }
+    .cardImage{
+        width: 100%;
+        height: calc(100% - 50px);
+        background-size: cover;
+        background-position: center;
+        transition: 500ms all ease;
+        border-radius: 5px;
+        border: 2px solid rgba(255 255 255 / .4);
+    }
+    .card .card3D{
+        position: absolute;
+        bottom:50px;
+        width:100%;
+        min-height:calc(100% - 50px);
+        background-size: cover;
+        background-position: center;
+        opacity: 0;
+        transition: 500ms all ease-in;
+        aspect-ratio: 3/2;
+        object-fit: contain;
+        filter: 
+        drop-shadow(2px -2px 1px rgba(255 255 255 /.3))
+        drop-shadow(-2px -2px 1px rgba(255 255 255 /.3))
+        drop-shadow(0 10px 5px #000);
+    }
+    .card .movieAbout{
+        visibility: hidden;
+    }
+    .card:hover .cardImage{
+        transform: perspective(900px) translateY(-5%) rotateX(25deg) translateY(0);
+        box-shadow: 0 15px 15px black;
+        filter: blur(1px);
+    }
+    .card:hover .card3D{
+        opacity: 1;
+        bottom:100px;
+        transform: perspective(0) translateY(0) rotateX(0) translateY(0)
+    }
+    .card .cardTitle{
+        position: absolute;
+        bottom: 0;
+        width:100%;
+        height: auto;
+        font-size: 30px;
+        text-align: center;
+        transition: 500ms all ease;
+        color: aqua;
+    }
+    .card:hover .cardTitle{
+        transform: translate3d(0%, -50%, 100px);
+    }
+    .continues .cardImage{
+        border: 2px solid green;
+    }
+    .newSeason .cardImage{
+        border: 2px solid yellow;
+    }
+    .final .cardImage{
+        border: 2px solid red;
+    }
+</style>
+<header>
+
+    <div class="logo"></div>
+<p class="movieContinue"><b>Yeşil</b> Kenarlı Dizileri İzlemeye Devam Ediyorum.</p>
+<p class="movieNewSeason"><b>Sarı</b> Kenarlı Dizilerin Yeni Sezonunu Bekliyorum.</p>
+<p class="movieFinal"><b>Kırmızı</b> Kenarlı Diziler Final Yaptı Maalesef...</p>
+<div class="movieInformation">
+    <div class="lastEpisode">1. Sezon 8. Bölüm</div>
+    <div class="informationText">Merhaba Ben Batuhan; Dizi ve Film İzlemeyi Severim. İzlediğim Dizilerin Kaldığım Bölümlerini, Gelecek Yeni Sezonlarını Unutabiliyorum Maalesef :D. Ben de Bu Yüzden Bu Sayfayı Oluşturdum.</div>
+</div>
+</header>
+    <div class="content">
+        <div class="topBunner">
+            <!-- <img src="./icon.png" alt="" class="icon"> -->
+            <img src="./myseriespage.png" alt="">
+        </div>
+        <div onclick="cardInformation(this)" class="card newSeason">
+            <div  class="cardImage" style="background-image: url(blueyesamurai-card.jpg);"></div>
+            <img class="card3D" src="blueyesamurai-3d.png" alt="">
+            <div class="movieAbout">Bu kışkırtıcı ve görsel olarak etkileyici dizi, izleyiciyi yetişkinlere yönelik göz alıcı bir
+                animasyon dünyasıyla buluşturuyor. Üstelik sunduğu heyecan açısından canlı çekim dizileri aratmıyor. Edo dönemi 
+                Japonyası'nda geçen BLUE EYE SAMURAI, intikam arayışıyla ömrünü gizlenerek geçiren melez kılıç ustası Mizu'nun öyküsünü anlatıyor</div>
+            <!-- <div class="cardTitle" translate="no">Blue Eye Samurai</div> -->
+        </div>
+        <div onclick="cardInformation(this)" class="card newSeason">
+            <div class="cardImage" style="background-image: url(onepiece-card.jpg);"></div>
+            <img class="card3D" src="onepiece-3d.png" alt="">
+            <div class="movieAbout">Denizcilik dünyasında genç bir korsan kaptan, ekibiyle birlikte Korsan Kral unvanını kazanmak ve 'One Piece' olarak bilinen efsanevi hazineyi keşfetmek için yola çıkar.
+            </div>
+            <!-- <div class="cardTitle" translate="no">Onepiece</div> -->
+        </div>
+        <div onclick="cardInformation(this)" class="card continues">
+            <div class="cardImage" style="background-image: url(thewalkingdead-card.jpg);"></div>
+            <img class="card3D" src="thewalkingdead-3d.jpg" alt="">
+            <div class="movieAbout">Yaşayan ölüler diyarına hoş geldiniz!
+                Kasabanın polis şefi Rick Grimes bir gün vurularak hastaneye kaldırılır; fakat o komadayken geçen sürede bildiği yaşam altüst olmuştur. Artık dünya, insan etiyle beslenen zombilerin insafına kalacak! Tabii birazcık insani duyguları kaldıysa... Atlanta'da kaostan sonra sessizce hayatta kalmaya çalışan küçük bir grup insanınsa, birbirlerinden başka tutunacak kimseleri yok...</div>
+            <!-- <div class="cardTitle" translate="no">Blue Eye Samurai</div> -->
+        </div>
+        <div onclick="cardInformation(this)" class="card final">
+            <div class="cardImage" style="background-image: url(gameofthrones-card.jpg);"></div>
+            <img class="card3D" src="gameofthrones-3d.png" alt="">
+            <div class="movieAbout">Yazların onlarca yıl, kışların ise bir ömür sürebildiği bir diyar, içten içe nifakla kaynamaktadır. Köklerini saldıkları topraklar kadar soğuk ve sert olan Starklar'ın kalesi Kıştepesi'nin kuzeyinde, Yedi Krallık'ı koruyan Sur'un ardında tekinsiz güçler toplanmaktadır.</div>
+            <!-- <div class="cardTitle" translate="no">Blue Eye Samurai</div> -->
+        </div>
+        <div class="card final">
+            <div class="cardImage" style="background-image: url(intothebadland-cars.jpg);"></div>
+            <img class="card3D" src="intothebadlands-3d.png" alt="">
+            <!-- <div class="cardTitle" translate="no">Blue Eye Samurai</div> -->
+        </div>
+        <div class="card newSeason">
+            <div class="cardImage" style="background-image: url(cobrakai-card.jpg);"></div>
+            <img class="card3D" src="cobrakari-3d.png" alt="">
+            <!-- <div class="cardTitle" translate="no">Blue Eye Samurai</div> -->
+        </div>
+        <div class="card final">
+            <div class="cardImage" style="background-image: url(lostinspace-card.jpg);"></div>
+            <img class="card3D" src="lostinspace-3d.png" alt="">
+            <div class="movieAbout">Yabancı bir gezegene zorunlu iniş yapan Robinsonlar tüm engellere rağmen hayatta kalmak ve gezegenden kaçmak için mücadele eder. Ama çevreleri gizli tehlikelerle doludur.</div>
+            <!-- <div class="cardTitle" translate="no">Blue Eye Samurai</div> -->
+        </div>
+        <div class="card newSeason">
+            <div class="cardImage" style="background-image: url(see-card.jpg);"></div>
+            <img class="card3D" src="see-3d.png" alt="">
+            <!-- <div class="cardTitle" translate="no">Blue Eye Samurai</div> -->
+        </div>
+        <div class="card final">
+            <div class="cardImage" style="background-image: url(sexeducation-card.jpg);"></div>
+            <img class="card3D" src="sexeducation-3d.png" alt="">
+            <!-- <div class="cardTitle" translate="no">Blue Eye Samurai</div> -->
+        </div>
+        <div class="card final">
+            <div class="cardImage" style="background-image: url(elite-card.jpg);"></div>
+            <img class="card3D" src="elite-3d.png" alt="">
+            <!-- <div class="cardTitle" translate="no">Blue Eye Samurai</div> -->
+        </div>
+        <div class="card final">
+            <div class="cardImage" style="background-image: url(lucifer-card.jpg);"></div>
+            <img class="card3D" src="lucifer-3d.png" alt="">
+            <!-- <div class="cardTitle" translate="no">Blue Eye Samurai</div> -->
+        </div>
+        <div class="card final">
+            <div class="cardImage" style="background-image: url(avatarthelastairbender-card.jpg);"></div>
+            <img class="card3D" src="avatarthelastairbender-3d.png" alt="">
+            <!-- <div class="cardTitle" translate="no">Blue Eye Samurai</div> -->
+        </div>
+    </div>
+    <script>
+
+        let cards = document.querySelectorAll(".card");
+        let information = document.querySelector(".movieInformation");
+        let infoText = document.querySelector(".informationText");
+
+        cards.forEach((card)=> {
+            card.onclick =  function(){
+                const backImage = card.querySelector(".cardImage").style.backgroundImage;
+            const movieAbout = card.querySelector(".movieAbout").innerHTML;
+            infoText.style.transition = "1s all ease";
+            information.style.transition = "1s all ease";
+            infoText.innerHTML = movieAbout;
+            information.style.visibility = "unset";
+            information.style.backgroundImage = backImage;
+            }
+        })
+
+        // function cardInformation(element){
+        //     const backImage = element.querySelector(".cardImage").style.backgroundImage;
+        //     const movieAbout = element.querySelector(".movieAbout").innerHTML;
+        //     infoText.style.transition = "1s all ease";
+        //     information.style.transition = "1s all ease";
+        //     infoText.innerHTML = movieAbout;
+        //     information.style.visibility = "unset";
+        //     information.style.backgroundImage = backImage;
+        // }
+    </script>
+</body>
+</html>
